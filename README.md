@@ -1,4 +1,6 @@
+
 # Ruby Programming
+
 ## Project: Custom Enumerables
 
 ### Introduction
@@ -11,7 +13,7 @@ This project is a great opportunity to get comfortable using yield and the #call
 
 For this assignment, you will add your new methods onto the existing Enumerable module. Ruby makes this easy for you because any class or module can be modified by doing something like this:
 
-``` ruby   
+``` ruby
 module Enumerable
     def my_each
         # your code here
