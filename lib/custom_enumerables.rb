@@ -44,8 +44,19 @@ module Enumerable
   # which will cause all? to return true when none of the collection members
   # are false or nil.
   def my_all?
-    
+    all_true = true
+    case self
+    when Array
+      my_each do |i|
+        all_true = false if yield i == false
+      end
+    when Hash
+      my_each do |i|
+        all_true = false if yield i[1] == false
+      end
+    end
+    all_true
   end
 end
 
-TestMethods.new
+TestMethods.new.test_my_all
