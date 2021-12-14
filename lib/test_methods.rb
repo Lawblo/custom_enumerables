@@ -49,4 +49,12 @@ class TestMethods
     # p(arr.my_count { |i| i > 1 })
     # p(hash.my_count { |k, v| v.is_a? String })
   end
+
+  def test_my_map
+    # p(arr.my_map { |i| i * i })
+    # p(hash.my_map { |k, v| v.to_s})
+  end
+
+  def test_my_inject
+  end
 end

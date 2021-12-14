@@ -85,7 +85,28 @@ module Enumerable
     count
   end
 
+  # Returns a new array with the results of running block once for every element in enum.
+  # If no block is given, an enumerator is returned instead.
   def my_map
+    # not returning enumerator
+    return self unless block_given?
+
+    mapped_array = []
+    my_each { |i| mapped_array << yield(i)}
+    mapped_array
+  end
+
+  # Combines all elements of enum by applying a binary operation,
+  # specified by a block or a symbol that names a method operator.
+  # The inject and reduce methods are aliases. There is no performance benefit to either.
+  # If you specify a block, then for each element in enum the block is passed
+  # an accumulator value (memo) and the element.
+  # If you specify a symbol instead, then each element in the collection will be passed to the named method of memo.
+  # In either case, the result becomes the new value for memo. At the end of the iteration,
+  # the final value of memo is the return value for the method.
+  # If you do not explicitly specify an initial value for memo,
+  # then the first element of collection is used as the initial value of memo.
+  def my_inject
   end
 end
 
