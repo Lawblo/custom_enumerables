@@ -42,4 +42,11 @@ class TestMethods
     p(hash.none?     { |k, v| v == 'first'})
     p(hash.my_none?  { |k, v| v == 'second'})
   end
+
+  def test_my_count
+    # p(arr.my_count)
+    # p(hash.my_count)
+    # p(arr.my_count { |i| i > 1 })
+    # p(hash.my_count { |k, v| v.is_a? String })
+  end
 end

@@ -73,8 +73,17 @@ module Enumerable
     my_each { |i| no_true = false if yield i }
     no_true
   end
+
+  # Returns the number of items in enum through enumeration.
+  # If an argument is given, the number of items in enum that are equal to item are counted.
+  # If a block is given, it counts the number of elements yielding a true value.
+  def my_count
+    return length unless block_given?
+
+    count = 0
+    my_each { |i| count += 1 if yield i }
+    count
+  end
 end
 
-TestMethods.new.test_my_none
-
-
+TestMethods.new.test_my_count
