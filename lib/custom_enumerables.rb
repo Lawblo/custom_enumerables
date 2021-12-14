@@ -15,7 +15,7 @@ module Enumerable
     return self unless block_given?
 
     j = 0
-    for i in self do 
+    self.my_each do 
       yield(i, j)
       j += 1
     end
@@ -24,20 +24,20 @@ module Enumerable
 
   # Returns an array containing all elements of enum for which the given block returns a true value.
   def my_select
-    store = {} if self.class == Hash 
-    store = [] if self.class == Array
-    if self.is_a? Array
-      for i in self do
-        store << i if yield i
+    case self
+    when Array
+      store_return = []
+      my_each do |i|
+        store_return << i if yield i
       end
-    elsif self.is_a? Array
-      for i in self do
-        store[i] = j if yield j
+    when Hash
+      store_return = {}
+      my_each do |k|
+        store_return[k[0]] = k[1]  if yield k
       end
-    end 
-    store
+    end
+    store_return
   end
-
 end
 
 # create new to run tests
@@ -46,17 +46,23 @@ class TestMethods
   attr_accessor(:hash, :arr)
 
   def initialize
-    @hash = {a: 'first', b: 'second'}
+    @hash = {a: 'first', b: 'second', c: 3}
     @arr = [1, 2, 3, 'a', 'b', 'c']
     test_my_select
   end
 
   def test_my_select
-    #p select_array = arr.select { |i| i.is_a? String }
-    #p my_select_array = arr.my_select { |i| i.is_a? String }
-    p select_hash = hash.select { |i, j| j.is_a? String }
-    p my_select_hash = hash.my_select { |i, j| j.is_a? String }
+    p arr.select      { |i| i.is_a? String }
+    p arr.my_select   { |i| i.is_a? String }
+    p hash.select     { |k, v| v.is_a? String }
+    p hash.my_select  { |k, v| v.is_a? String }
   end
 end
+
+
+
+# hash = {a: 'first', b: 'second', c: 3}
+# hash.each {|i, j| p "#{i} #{j}"}
+
 
 TestMethods.new
