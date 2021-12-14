@@ -84,6 +84,9 @@ module Enumerable
     my_each { |i| count += 1 if yield i }
     count
   end
+
+  def my_map
+  end
 end
 
-TestMethods.new.test_my_count
+TestMethods.new.test_my_map
