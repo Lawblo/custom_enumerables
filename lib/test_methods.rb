@@ -18,13 +18,13 @@ class TestMethods
   end
 
   def test_my_all
-    # p(arr.all? { |i| i})
-    # p(arr.all? { |i| !i})
-    # p(arr.my_all? { |i| i})
-    # p(arr.my_all? { |i| !i})
-    p(hash.all? { |k, v| v.is_a? String })
-    p(hash.my_all? { |k, v| v.is_a? String })
-    p(hash.all? { |k, v| !v.is_a? String})
-    p(hash.my_all? { |k, v| !v.is_a? String})
+    p(arr.all?      { |i| i == String})
+    p(arr.my_all?   { |i| i == String})
+    p(arr.all?      { |i| i != String})
+    p(arr.my_all?   { |i| i != String})
+    p(hash.all?     { |k, v| k == String })
+    p(hash.my_all?  { |k, v| k == String })
+    p(hash.all?     { |k, v| k != String })
+    p(hash.my_all?  { |k, v| k != String })
   end
 end

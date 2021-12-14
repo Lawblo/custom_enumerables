@@ -48,11 +48,12 @@ module Enumerable
     case self
     when Array
       my_each do |i|
-        all_true = false if yield i == false
+        all_true = false unless yield i
       end
     when Hash
       my_each do |i|
-        all_true = false if yield i[1] == false
+        #puts "#{i[1]} is a #{i[1].class}"
+        all_true = false unless yield i[1]
       end
     end
     all_true
