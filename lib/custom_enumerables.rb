@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'test_methods'
+
 # already existing module, adding methods
 module Enumerable
   def my_each
@@ -15,7 +17,7 @@ module Enumerable
     return self unless block_given?
 
     j = 0
-    self.my_each do 
+    my_each do
       yield(i, j)
       j += 1
     end
@@ -23,46 +25,27 @@ module Enumerable
   end
 
   # Returns an array containing all elements of enum for which the given block returns a true value.
+  # Returns hash for hashes
   def my_select
     case self
     when Array
       store_return = []
-      my_each do |i|
-        store_return << i if yield i
-      end
+      my_each { |i|store_return << i if yield i }
     when Hash
       store_return = {}
-      my_each do |k|
-        store_return[k[0]] = k[1]  if yield k
-      end
+      my_each { |k| store_return[k[0]] = k[1] if yield k }
     end
     store_return
   end
-end
 
-# create new to run tests
-class TestMethods
-  include Enumerable
-  attr_accessor(:hash, :arr)
-
-  def initialize
-    @hash = {a: 'first', b: 'second', c: 3}
-    @arr = [1, 2, 3, 'a', 'b', 'c']
-    test_my_select
-  end
-
-  def test_my_select
-    p arr.select      { |i| i.is_a? String }
-    p arr.my_select   { |i| i.is_a? String }
-    p hash.select     { |k, v| v.is_a? String }
-    p hash.my_select  { |k, v| v.is_a? String }
+  # Passes each element of the collection to the given block.
+  # The method returns true if the block never returns false or nil.
+  # If the block is not given, Ruby adds an implicit block of { |obj| obj }
+  # which will cause all? to return true when none of the collection members
+  # are false or nil.
+  def my_all?
+    
   end
 end
-
-
-
-# hash = {a: 'first', b: 'second', c: 3}
-# hash.each {|i, j| p "#{i} #{j}"}
-
 
 TestMethods.new
