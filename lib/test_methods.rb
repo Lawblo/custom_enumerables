@@ -56,5 +56,15 @@ class TestMethods
   end
 
   def test_my_inject
+    # p(arr.my_inject { |sum, i| sum + i })
+    # p(arr.inject { |sum, i| sum + i })
+    # p(arr.inject(:+))
+  end
+
+  # Test your #my_inject by creating a method called #multiply_els which multiplies
+  # all the elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
+
+  def multiply_els
+    p([2, 4, 5].my_inject { |sum, i| sum * i })
   end
 end

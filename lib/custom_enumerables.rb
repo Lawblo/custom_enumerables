@@ -98,7 +98,6 @@ module Enumerable
 
   # Combines all elements of enum by applying a binary operation,
   # specified by a block or a symbol that names a method operator.
-  # The inject and reduce methods are aliases. There is no performance benefit to either.
   # If you specify a block, then for each element in enum the block is passed
   # an accumulator value (memo) and the element.
   # If you specify a symbol instead, then each element in the collection will be passed to the named method of memo.
@@ -106,8 +105,11 @@ module Enumerable
   # the final value of memo is the return value for the method.
   # If you do not explicitly specify an initial value for memo,
   # then the first element of collection is used as the initial value of memo.
-  def my_inject
+  def my_inject(initial = nil)
+    gather = initial
+    my_each { |i| gather = !gather ? i : yield(gather, i) }
+    gather
   end
 end
 
-TestMethods.new.test_my_map
+TestMethods.new.multiply_els
